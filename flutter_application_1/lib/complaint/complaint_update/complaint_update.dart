@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/home/home_page.dart';
+import 'package:flutter_application_1/utils/app_color.dart';
 
 class ComplaintUpdateScreen extends StatefulWidget {
   @override
@@ -10,7 +10,7 @@ class _ComplaintUpdateScreenState extends State<ComplaintUpdateScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFe28743),
+      backgroundColor: AppColor.orange,
       appBar: AppBar(
         title: Text('CẬP NHẬT ĐƠN KHIẾU NẠI TỐ CÁO', textAlign: TextAlign.center),
         backgroundColor: Colors.black,

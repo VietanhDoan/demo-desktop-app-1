@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/complaint/complaint_list/complaint_list.dart';
 import 'package:flutter_application_1/complaint/complaint_search/complaint_search.dart';
 import 'package:flutter_application_1/complaint/complaint_update/complaint_update.dart';
+import 'package:flutter_application_1/utils/app_color.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -82,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
     ];
 
     return Scaffold(
-      backgroundColor: Color(0xFFe28743),
+      backgroundColor: AppColor.orange,
       appBar: AppBar(
         title: Text('Phần mềm Quản lý Đơn khiếu nại tố cáo'),
         centerTitle: true,
@@ -96,28 +97,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         itemCount: buttons.length,
         itemBuilder: (context, index) {
-          return InkWell(
-            onTap: () => Navigator.push(
+          return MenuButton(label: buttons[index]['label'], imagePath: buttons[index]['image'], onPressed: () => Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => buttons[index]['screen']),
-            ),
-            child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(buttons[index]['image']),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              child: Center(
-                child: Text(
-                  buttons[index]['label'],
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    backgroundColor: Colors.black45,
-                  ),
-                ),
-              ),
             ),
           );
         },
@@ -140,23 +122,39 @@ class MenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPressed,
-      child: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(imagePath), // This should be the path to your image file
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: Center(
-          child: Text(
-            label,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              backgroundColor: Colors.black45, // Semi-transparent black background for the text
+    return Container(
+      padding: EdgeInsets.all(16.0), // Padding around the entire button
+      child: GestureDetector(
+        onTap: onPressed,
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16.0), // Rounded corners
+            image: DecorationImage(
+              image: AssetImage(imagePath), // This should be the path to your image file
+              fit: BoxFit.cover,
             ),
+          ),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              // Dark overlay to ensure text stands out
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16.0),
+                  color: Colors.black45, // Semi-transparent black overlay
+                ),
+              ),
+              // Text label
+              Text(
+                label,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold, // Bold text to make the title stand out
+                ),
+              ),
+            ],
           ),
         ),
       ),
