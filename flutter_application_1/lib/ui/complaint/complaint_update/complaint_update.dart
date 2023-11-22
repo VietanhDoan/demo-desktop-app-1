@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/utils/app_color.dart';
+import 'package:flutter_application_1/utils/app_date_field.dart';
+import 'package:flutter_application_1/utils/app_dropdown_item.dart';
 import 'package:flutter_application_1/utils/app_style.dart';
+import 'package:flutter_application_1/utils/app_text_field.dart';
 
 class ComplaintUpdateScreen extends StatefulWidget {
   @override
@@ -21,8 +24,8 @@ class _ComplaintUpdateScreenState extends State<ComplaintUpdateScreen> {
   TextEditingController _addressController = TextEditingController();
   TextEditingController _subjectController = TextEditingController();
   TextEditingController _contentController = TextEditingController();
-  String _returnOrderValue = 'Yes';
-  String _authorityValue = 'Within Authority';
+  String _returnOrderValue = 'Có';
+  String _authorityValue = 'Đơn thuộc thẩm quyền';
 
   @override
   void dispose() {
@@ -40,19 +43,19 @@ class _ComplaintUpdateScreenState extends State<ComplaintUpdateScreen> {
     return Scaffold(
       backgroundColor: AppColor.orange,
       appBar: AppBar(
-        title:
-            Text('CẬP NHẬT ĐƠN KHIẾU NẠI TỐ CÁO', textAlign: TextAlign.center),
+        title: const Text('CẬP NHẬT ĐƠN KHIẾU NẠI TỐ CÁO',
+            textAlign: TextAlign.center),
         backgroundColor: Colors.black,
         leading: IconButton(
-          icon: Icon(Icons.account_balance), // Icon for the Viện kiểm sát
+          icon: const Icon(Icons.account_balance), // Icon for the Viện kiểm sát
           onPressed: () {
             // Assuming HomeScreen is the widget for your home screen
             Navigator.pop(context);
           },
         ), // Icon for the Viện kiểm sát
-        actions: [
+        actions: const [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.symmetric(horizontal: 16.0),
             child: Center(child: Text('Vụ 12')), // Label "Vụ 12"
           ),
         ],
@@ -67,8 +70,8 @@ class _ComplaintUpdateScreenState extends State<ComplaintUpdateScreen> {
                   borderRadius: BorderRadius.circular(16.0),
                   color: Colors.white,
                 ),
-                margin: EdgeInsets.all(16.0),
-                padding: EdgeInsets.all(16.0),
+                margin: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16.0),
                 child: Column(
                   children: [
                     // row 1
@@ -79,29 +82,29 @@ class _ComplaintUpdateScreenState extends State<ComplaintUpdateScreen> {
                           flex: 1,
                           child: TextFormField(
                             enabled: false,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               labelText: 'Số TT',
                               filled: true,
                             ),
                           ),
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Expanded(
                           flex: 4,
                           child: TextFormField(
                             enabled: false,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               labelText: 'Đơn vị',
                               filled: true,
                             ),
                           ),
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Expanded(
                           flex: 5,
                           child: TextFormField(
                             controller: _dateHandlingController,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               labelText: 'Ngày thụ lý',
                               suffixIcon: Icon(Icons.calendar_today),
                             ),
@@ -112,7 +115,7 @@ class _ComplaintUpdateScreenState extends State<ComplaintUpdateScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
 
                     // row 2
                     Row(
@@ -121,7 +124,7 @@ class _ComplaintUpdateScreenState extends State<ComplaintUpdateScreen> {
                         Expanded(
                           child: TextFormField(
                             controller: _dateFirstController,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               labelText: 'Ngày đơn lần đầu',
                               suffixIcon: Icon(Icons.calendar_today),
                             ),
@@ -130,22 +133,22 @@ class _ComplaintUpdateScreenState extends State<ComplaintUpdateScreen> {
                             readOnly: true,
                           ),
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Expanded(
                           child: TextFormField(
                             controller: _nameController,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               labelText: 'Họ và tên',
                             ),
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     // row 3
                     TextFormField(
                       controller: _addressController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Địa chỉ',
                       ),
                     ),
@@ -156,16 +159,16 @@ class _ComplaintUpdateScreenState extends State<ComplaintUpdateScreen> {
                         Expanded(
                           child: TextFormField(
                             controller: _subjectController,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               labelText: 'Đối tượng',
                             ),
                           ),
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Expanded(
                           child: DropdownButtonFormField(
                             value: _returnOrderValue,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               labelText: 'Trả lại đơn',
                             ),
                             onChanged: (String? newValue) {
@@ -173,7 +176,7 @@ class _ComplaintUpdateScreenState extends State<ComplaintUpdateScreen> {
                                 _returnOrderValue = newValue!;
                               });
                             },
-                            items: <String>['Yes', 'No']
+                            items: <String>['Có', 'Không']
                                 .map<DropdownMenuItem<String>>((String value) {
                               return DropdownMenuItem<String>(
                                 value: value,
@@ -184,12 +187,12 @@ class _ComplaintUpdateScreenState extends State<ComplaintUpdateScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
 
                     // Row 5
                     DropdownButtonFormField(
                       value: _authorityValue,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Thẩm quyền',
                       ),
                       onChanged: (String? newValue) {
@@ -197,27 +200,26 @@ class _ComplaintUpdateScreenState extends State<ComplaintUpdateScreen> {
                           _authorityValue = newValue!;
                         });
                       },
-                      items: <String>['Within Authority', 'Outside Authority']
-                          .map<DropdownMenuItem<String>>((String value) {
+                      items: <String>[
+                        'Đơn thuộc thẩm quyền',
+                        'Đơn không thuộc thẩm quyền'
+                      ].map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
                           child: Text(value),
                         );
                       }).toList(),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
 
                     // Row 6
                     TextFormField(
                       controller: _contentController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Nội dung đơn',
                       ),
                       maxLines: null, // Allows for multi-line input
                     ),
-                    // row 5
-
-                    // row 6
 
                     // row 7
                     Row(
@@ -225,11 +227,12 @@ class _ComplaintUpdateScreenState extends State<ComplaintUpdateScreen> {
                         Expanded(
                           child: buildDateField(context, 'Thời hạn'),
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Expanded(
                           child: TextFormField(
                             controller: integerController,
-                            decoration: InputDecoration(labelText: 'Số ngày'),
+                            decoration:
+                                const InputDecoration(labelText: 'Số ngày'),
                             keyboardType: TextInputType.number,
                           ),
                         ),
@@ -244,19 +247,19 @@ class _ComplaintUpdateScreenState extends State<ComplaintUpdateScreen> {
                                   });
                                 },
                               ),
-                              Text('Xác nhận đơn'),
+                              const Text('Xác nhận đơn'),
                             ],
                           ),
                         ),
                         Expanded(
                           child: TextFormField(
-                            decoration:
-                                InputDecoration(labelText: 'Nơi đang xử lý'),
+                            decoration: const InputDecoration(
+                                labelText: 'Nơi đang xử lý'),
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
 
                     // row 8
                     Row(
@@ -264,8 +267,8 @@ class _ComplaintUpdateScreenState extends State<ComplaintUpdateScreen> {
                       children: [
                         ElevatedButton(
                           onPressed: () {},
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                          child: const Padding(
+                            padding: EdgeInsets.all(8.0),
                             child: Text(
                               'Nhập mới',
                               style: TextStyle(
@@ -273,13 +276,13 @@ class _ComplaintUpdateScreenState extends State<ComplaintUpdateScreen> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 12.0,
                         ),
                         ElevatedButton(
                           onPressed: () {},
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                          child: const Padding(
+                            padding: EdgeInsets.all(8.0),
                             child: Text(
                               'Update',
                               style: TextStyle(
@@ -287,13 +290,13 @@ class _ComplaintUpdateScreenState extends State<ComplaintUpdateScreen> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 12.0,
                         ),
                         ElevatedButton(
                           onPressed: () {},
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                          child: const Padding(
+                            padding: EdgeInsets.all(8.0),
                             child: Text(
                               'Trùng đơn + việc',
                               style: TextStyle(
@@ -301,13 +304,13 @@ class _ComplaintUpdateScreenState extends State<ComplaintUpdateScreen> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 12.0,
                         ),
                         ElevatedButton(
                           onPressed: () {},
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                          child: const Padding(
+                            padding: EdgeInsets.all(8.0),
                             child: Text(
                               'Tiến độ',
                               style: TextStyle(
@@ -331,9 +334,9 @@ class _ComplaintUpdateScreenState extends State<ComplaintUpdateScreen> {
                       // "Mã việc" Input Text
                       Expanded(
                         child: Padding(
-                          padding: EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(8.0),
                           child: TextFormField(
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               labelText: 'Mã việc',
                               border: OutlineInputBorder(),
                             ),
@@ -343,9 +346,9 @@ class _ComplaintUpdateScreenState extends State<ComplaintUpdateScreen> {
                       // "Nhóm việc" Input Text
                       Expanded(
                         child: Padding(
-                          padding: EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(8.0),
                           child: TextFormField(
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               labelText: 'Nhóm việc',
                               border: OutlineInputBorder(),
                             ),
@@ -355,9 +358,9 @@ class _ComplaintUpdateScreenState extends State<ComplaintUpdateScreen> {
                       // "Đơn vị phân loại" Input Text
                       Expanded(
                         child: Padding(
-                          padding: EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(8.0),
                           child: TextFormField(
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               labelText: 'Đơn vị phân loại',
                               border: OutlineInputBorder(),
                             ),
@@ -366,12 +369,12 @@ class _ComplaintUpdateScreenState extends State<ComplaintUpdateScreen> {
                       ),
                       Expanded(
                         child: Padding(
-                          padding: EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(8.0),
                           child: ElevatedButton(
                             onPressed: () {
                               // Handle the action when the button is pressed
                             },
-                            child: Text(
+                            child: const Text(
                               'Update',
                               style: TextStyle(
                                   fontSize: AppStyle.fontSizeTextButton),
@@ -384,14 +387,178 @@ class _ComplaintUpdateScreenState extends State<ComplaintUpdateScreen> {
                 ),
               ),
               Section(
-                  title: 'NƠI NHẬN ĐƯỢC ĐƠN',
-                  content: Text('Content for Nơi nhận được đơn')),
+                title: 'NƠI NHẬN ĐƯỢC ĐƠN',
+                content: IntrinsicHeight(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment
+                        .stretch, // Align items to stretch to fill the cell height
+                    children: <Widget>[
+                      Expanded(child: AppTextField(hint: 'Đơn vị nhận')),
+                      SizedBox(width: 8.0),
+                      Expanded(
+                          child: AppDateField(
+                        label: 'Ngày nhận',
+                        controller: dateController,
+                      )),
+                      SizedBox(width: 8.0),
+                      Expanded(
+                          child: AppDropdownItem(
+                              label: 'Chuyển đơn vị',
+                              items: ['Item 1', 'Item 2'])),
+                      SizedBox(width: 8.0),
+                      Expanded(
+                          child: AppDropdownItem(
+                              label: 'Nguồn đến',
+                              items: ['Source 1', 'Source 2'])),
+                      SizedBox(width: 8.0),
+                      Expanded(child: AppTextField(hint: 'Số công văn')),
+                      SizedBox(width: 8.0),
+                      Expanded(
+                          child: AppDateField(
+                        label: 'Ngày công văn (đơn)',
+                        controller: dateController,
+                      )),
+                      SizedBox(width: 8.0),
+                      Expanded(child: AppTextField(hint: 'Lần')),
+                      SizedBox(width: 8.0),
+                      Expanded(child: AppTextField(hint: 'Số đơn')),
+                      SizedBox(width: 8.0),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              // Handle the action when the button is pressed
+                            },
+                            child: const Text(
+                              'Update',
+                              style: TextStyle(
+                                  fontSize: AppStyle.fontSizeTextButton),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
               Section(
                   title: 'QUÁ TRÌNH XỬ LÝ',
-                  content: Text('Content for Quá trình xử lý')),
+                  content: IntrinsicHeight(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment
+                          .stretch, // Make children fill the cell height
+                      children: <Widget>[
+                        Expanded(
+                            child: AppDateField(
+                          label: 'Ngày xử lý',
+                          controller: dateController,
+                        )),
+                        SizedBox(width: 8.0),
+                        Expanded(child: AppTextField(hint: 'Đơn vị xử lý')),
+                        SizedBox(width: 8.0),
+                        Expanded(
+                            child: AppDropdownItem(
+                                label: 'Văn bản giải quyết ban hành',
+                                items: ['Item 1', 'Item 2'])),
+                                SizedBox(width: 8.0),
+                        Expanded(
+                            child: AppDropdownItem(
+                                label: 'Nội dung xử lý',
+                                items: ['Content 1', 'Content 2'])),
+                                SizedBox(width: 8.0),
+                        Expanded(child: AppTextField(hint: 'Số công văn')),
+                        SizedBox(width: 8.0),
+                        Expanded(
+                            child: AppDateField(
+                          label: 'Ngày công văn',
+                          controller: dateController,
+                        )),
+                        SizedBox(width: 8.0),
+                        Expanded(
+                            child: AppDropdownItem(
+                                label: 'Cán bộ xử lý',
+                                items: ['Officer 1', 'Officer 2'])),
+                                SizedBox(width: 8.0),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                // Handle the action when the button is pressed
+                              },
+                              child: const Text(
+                                'Update',
+                                style: TextStyle(
+                                    fontSize: AppStyle.fontSizeTextButton),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )),
               Section(
                   title: 'CÁC KẾT LUẬN',
-                  content: Text('Content for Các kết luận')),
+                  content: IntrinsicHeight(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment
+                          .stretch, // Align children to stretch to fill the row height
+                      children: <Widget>[
+                        Expanded(
+                          flex:
+                              2, // You can adjust flex factor to give more space to certain columns if needed
+                          child: AppTextField(
+                              hint: 'Đơn vị'), // Custom text field widget
+                        ),
+                        SizedBox(width: 8.0),
+                        Expanded(
+                          flex: 2,
+                          child: AppDateField(
+                            label: 'Ngày kết luận',
+                            controller: dateController,
+                          ), // Custom date picker widget
+                        ),
+                        SizedBox(width: 8.0),
+                        Expanded(
+                          flex: 2,
+                          child: AppTextField(
+                              hint:
+                                  'Số công văn'), // Custom text field widget for number input
+                        ),
+                        SizedBox(width: 8.0),
+                        Expanded(
+                          flex: 3,
+                          child: AppDropdownItem(
+                              label: 'Nội dung kết luận',
+                              items: ['Item 1', 'Item 2']), // Dropdown menu
+                        ),
+                        SizedBox(width: 8.0),
+                        Expanded(
+                          flex: 3,
+                          child: AppTextField(
+                              hint:
+                                  'Ghi chú'), // Custom text field widget for notes
+                        ),
+                        SizedBox(width: 8.0),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                // Handle the action when the button is pressed
+                              },
+                              child: const Text(
+                                'Update',
+                                style: TextStyle(
+                                    fontSize: AppStyle.fontSizeTextButton),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )),
             ],
           ),
         ),
@@ -404,7 +571,7 @@ class _ComplaintUpdateScreenState extends State<ComplaintUpdateScreen> {
       controller: dateController,
       decoration: InputDecoration(
         labelText: label,
-        suffixIcon: Icon(Icons.calendar_today),
+        suffixIcon: const Icon(Icons.calendar_today),
       ),
       readOnly: true,
       onTap: () async {
@@ -457,8 +624,8 @@ class Section extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(16.0),
-      padding: EdgeInsets.all(16.0),
+      margin: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(8.0),
@@ -467,7 +634,7 @@ class Section extends StatelessWidget {
             color: Colors.black.withOpacity(0.2),
             spreadRadius: 1,
             blurRadius: 3,
-            offset: Offset(0, 2),
+            offset: const Offset(0, 2),
           ),
         ],
       ),
@@ -478,7 +645,8 @@ class Section extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(bottom: 8.0),
               child: Text(title,
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  style: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold)),
             ),
           content,
         ],

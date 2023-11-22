@@ -19,7 +19,6 @@ class _ComplaintSearchScreenState extends State<ComplaintSearchScreen> {
   TextEditingController dateController = TextEditingController();
   String dropdownValue2 = 'One';
 
-  final TextEditingController _dateController = TextEditingController();
   String authorityValue = 'Option 1';
   String returnOrderValue = 'Có';
   String confirmOrderValue = 'Hiện tất';
@@ -53,8 +52,10 @@ class _ComplaintSearchScreenState extends State<ComplaintSearchScreen> {
       body: Column(children: [
         Expanded(
           child: Container(
-            color:
-                Colors.white, // This sets the background color for the ListView
+            decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16.0),
+                  color: Colors.white,
+                ),
             margin: const EdgeInsets.all(16.0),
             child: ListView(
               padding: const EdgeInsets.all(16.0),

@@ -12,27 +12,30 @@ class AppDateField extends StatefulWidget {
 class _AppDateFieldState extends State<AppDateField> {
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: widget.controller,
-      decoration: InputDecoration(
-        labelText: widget.label,
-        border: const OutlineInputBorder(),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: TextFormField(
+        controller: widget.controller,
+        decoration: InputDecoration(
+          labelText: widget.label,
+          border: const OutlineInputBorder(),
+        ),
+        onTap: () async {
+          DateTime? pickedDate = await showDatePicker(
+            context: context,
+            initialDate: DateTime.now(),
+            firstDate: DateTime(2000),
+            lastDate: DateTime(2101),
+          );
+          if (pickedDate != null) {
+            String formattedDate =
+                "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}";
+            setState(() {
+              widget.controller.text = formattedDate;
+            });
+          }
+        },
       ),
-      onTap: () async {
-        DateTime? pickedDate = await showDatePicker(
-          context: context,
-          initialDate: DateTime.now(),
-          firstDate: DateTime(2000),
-          lastDate: DateTime(2101),
-        );
-        if (pickedDate != null) {
-          String formattedDate =
-              "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}";
-          setState(() {
-            widget.controller.text = formattedDate;
-          });
-        }
-      },
     );
   }
 }
