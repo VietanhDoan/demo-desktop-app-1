@@ -4,6 +4,7 @@ import 'package:flutter_application_1/ui/complaint/complaint_search/items/sectio
 import 'package:flutter_application_1/utils/app_color.dart';
 import 'package:flutter_application_1/utils/app_date_field.dart';
 import 'package:flutter_application_1/utils/app_number_field.dart';
+import 'package:flutter_application_1/utils/app_style.dart';
 import 'package:flutter_application_1/utils/app_text_field.dart';
 
 class ComplaintSearchScreen extends StatefulWidget {
@@ -18,7 +19,6 @@ class _ComplaintSearchScreenState extends State<ComplaintSearchScreen> {
   TextEditingController dateController = TextEditingController();
   String dropdownValue2 = 'One';
 
-  final TextEditingController _dateController = TextEditingController();
   String authorityValue = 'Option 1';
   String returnOrderValue = 'Có';
   String confirmOrderValue = 'Hiện tất';
@@ -49,276 +49,271 @@ class _ComplaintSearchScreenState extends State<ComplaintSearchScreen> {
           },
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: ListView(
-          children: <Widget>[
-            statusWidget(),
-            const SizedBox(height: 16.0),
+      body: Column(children: [
+        Expanded(
+          child: Container(
+            decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16.0),
+                  color: Colors.white,
+                ),
+            margin: const EdgeInsets.all(16.0),
+            child: ListView(
+              padding: const EdgeInsets.all(16.0),
+              children: <Widget>[
+                statusWidget(),
+                const SizedBox(height: 16.0),
 
-            // Thông tin chung
-            const GeneralInfoWidget(),
-            const SizedBox(height: 16.0),
+                // Thông tin chung
+                const GeneralInfoWidget(),
+                const SizedBox(height: 16.0),
 
-            // Phân loại đơn và Noi nhận được đon
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: SectionBox(
-                    title: 'Phân loại đơn',
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.only(right: 8.0),
-                            child: TextFormField(
-                              decoration: const InputDecoration(
-                                hintText: 'Mã việc',
-                                border: OutlineInputBorder(),
+                // Phân loại đơn và Noi nhận được đon
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: SectionBox(
+                        title: 'Phân loại đơn',
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: 8.0),
+                                child: TextFormField(
+                                  decoration: const InputDecoration(
+                                    hintText: 'Mã việc',
+                                    border: OutlineInputBorder(),
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
+                            Expanded(
+                              child: TextFormField(
+                                decoration: const InputDecoration(
+                                  hintText: 'Đơn vị phân loại',
+                                  border: OutlineInputBorder(),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                        Expanded(
+                      ),
+                    ),
+                    const SizedBox(width: 16.0),
+                    Expanded(
+                      child: SectionBox(
+                        title: 'Nơi nhận được đơn',
+                        child: Column(
+                          children: [
+                            // Hàng 1
+                            const Row(
+                              children: [
+                                Expanded(
+                                  child: Padding(
+                                    padding: EdgeInsets.only(right: 8.0),
+                                    child: AppTextField(hint: 'Đơn vị'),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Padding(
+                                    padding: EdgeInsets.only(right: 8.0),
+                                    child: AppTextField(hint: 'Nguồn'),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Padding(
+                                    padding: EdgeInsets.only(right: 8.0),
+                                    child: AppTextField(hint: 'Lần'),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: AppTextField(hint: 'Số đơn'),
+                                ),
+                              ],
+                            ),
+                            // Hàng 2
+                            Row(
+                              children: [
+                                const Expanded(
+                                  child: Padding(
+                                    padding: EdgeInsets.only(right: 8.0),
+                                    child: AppTextField(hint: 'CV số'),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 8.0),
+                                    child: AppDateField(
+                                        label: 'từ ngày',
+                                        controller: dateController1),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: AppDateField(
+                                      label: 'đến ngày',
+                                      controller: dateController2),
+                                ),
+                              ],
+                            ),
+                            // Hàng 3
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 8.0),
+                                    child: AppDateField(
+                                        label: 'Nhận đơn từ ngày',
+                                        controller: dateController1),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: AppDateField(
+                                      label: 'đến ngày',
+                                      controller: dateController2),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16.0),
+
+                // Quá trình xử lý
+                SectionBox(
+                  title: 'Quá trình xử lý',
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                              child: AppDateField(
+                                  label: 'Nhận từ ngày',
+                                  controller: dateController1)),
+                          const SizedBox(width: 8.0),
+                          Expanded(
+                              child: AppDateField(
+                                  label: 'đến ngày',
+                                  controller: dateController2)),
+                          const SizedBox(width: 8.0),
+                          const Expanded(child: AppTextField(hint: 'Đơn vị')),
+                          const SizedBox(width: 8.0),
+                          const Expanded(child: AppTextField(hint: 'Nội dung')),
+                        ],
+                      ),
+                      const SizedBox(height: 8.0),
+                      Row(
+                        children: [
+                          const Expanded(child: AppNumberField(hint: 'CV số')),
+                          const SizedBox(width: 8.0),
+                          Expanded(
+                              child: AppDateField(
+                                  label: 'từ ngày',
+                                  controller: dateController1)),
+                          const SizedBox(width: 8.0),
+                          Expanded(
+                              child: AppDateField(
+                                  label: 'đến ngày',
+                                  controller: dateController2)),
+                          const SizedBox(width: 8.0),
+                          const Expanded(child: AppTextField(hint: 'Cán bộ')),
+                          const SizedBox(width: 8.0),
+                          Expanded(
+                              child: AppDateField(
+                                  label: 'Ngày báo cáo',
+                                  controller: dateController)),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 16.0),
+
+                // Kết luận
+                SectionBox(
+                  title: 'Kết luận',
+                  child: Row(
+                    children: [
+                      // "Nội dung" input text
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 8.0),
                           child: TextFormField(
                             decoration: const InputDecoration(
-                              hintText: 'Đơn vị phân loại',
+                              hintText: 'Nội dung',
                               border: OutlineInputBorder(),
                             ),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                      // "CV số" input text
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 8.0),
+                          child: TextFormField(
+                            decoration: const InputDecoration(
+                              hintText: 'CV số',
+                              border: OutlineInputBorder(),
+                            ),
+                          ),
+                        ),
+                      ),
+                      // "từ ngày" date picker
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 8.0),
+                          child: AppDateField(
+                              label: 'từ ngày', controller: dateController1),
+                        ),
+                      ),
+                      // "đến ngày" date picker
+                      Expanded(
+                        child: AppDateField(
+                            label: 'đến ngày', controller: dateController2),
+                      ),
+                    ],
                   ),
                 ),
-                const SizedBox(width: 16.0),
-                Expanded(
-                  child: SectionBox(
-                    title: 'Nơi nhận được đơn',
-                    child: Column(
-                      children: [
-                        // Hàng 1
-                        const Row(
-                          children: [
-                            Expanded(
-                              child: Padding(
-                                padding: EdgeInsets.only(right: 8.0),
-                                child: AppTextField(hint: 'Đơn vị'),
-                              ),
-                            ),
-                            Expanded(
-                              child: Padding(
-                                padding: EdgeInsets.only(right: 8.0),
-                                child: AppTextField(hint: 'Nguồn'),
-                              ),
-                            ),
-                            Expanded(
-                              child: Padding(
-                                padding: EdgeInsets.only(right: 8.0),
-                                child: AppTextField(hint: 'Lần'),
-                              ),
-                            ),
-                            Expanded(
-                              child: AppTextField(hint: 'Số đơn'),
-                            ),
-                          ],
-                        ),
-                        // Hàng 2
-                        Row(
-                          children: [
-                            const Expanded(
-                              child: Padding(
-                                padding: EdgeInsets.only(right: 8.0),
-                                child: AppTextField(hint: 'CV số'),
-                              ),
-                            ),
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.only(right: 8.0),
-                                child: AppDateField(
-                                    label: 'từ ngày',
-                                    controller: dateController1),
-                              ),
-                            ),
-                            Expanded(
-                              child: AppDateField(
-                                  label: 'đến ngày',
-                                  controller: dateController2),
-                            ),
-                          ],
-                        ),
-                        // Hàng 3
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.only(right: 8.0),
-                                child: AppDateField(
-                                    label: 'Nhận đơn từ ngày',
-                                    controller: dateController1),
-                              ),
-                            ),
-                            Expanded(
-                              child: AppDateField(
-                                  label: 'đến ngày',
-                                  controller: dateController2),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                const SizedBox(height: 16.0),
+                // Add more widgets for other search criteria here...
+              ],
+            ),
+          ),
+        ),
+        Container(
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 16.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // Tìm mới Button
+                ElevatedButton(
+                  onPressed: () {
+                    // Handle the action when the button is pressed
+                  },
+                  child: const Text(
+                    'Tìm mới',
+                    style: TextStyle(fontSize: AppStyle.fontSizeTextButton),
+                  ),
+                ),
+                SizedBox(width: 8.0),
+                // Tìm Button
+                ElevatedButton(
+                  onPressed: () {
+                    // Handle the action when the button is pressed
+                  },
+                  child: const Text(
+                    'Tìm',
+                    style: TextStyle(fontSize: AppStyle.fontSizeTextButton),
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 16.0),
-
-            // Quá trình xử lý
-            SectionBox(
-              title: 'Quá trình xử lý',
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                          child: AppDateField(
-                              label: 'Nhận từ ngày',
-                              controller: dateController1)),
-                      const SizedBox(width: 8.0),
-                      Expanded(
-                          child: AppDateField(
-                              label: 'đến ngày', controller: dateController2)),
-                      const SizedBox(width: 8.0),
-                      const Expanded(child: AppTextField(hint: 'Đơn vị')),
-                      const SizedBox(width: 8.0),
-                      const Expanded(child: AppTextField(hint: 'Nội dung')),
-                    ],
-                  ),
-                  const SizedBox(height: 8.0),
-                  Row(
-                    children: [
-                      const Expanded(child: AppNumberField(hint: 'CV số')),
-                      const SizedBox(width: 8.0),
-                      Expanded(
-                          child: AppDateField(
-                              label: 'từ ngày', controller: dateController1)),
-                      const SizedBox(width: 8.0),
-                      Expanded(
-                          child: AppDateField(
-                              label: 'đến ngày', controller: dateController2)),
-                      const SizedBox(width: 8.0),
-                      const Expanded(child: AppTextField(hint: 'Cán bộ')),
-                      const SizedBox(width: 8.0),
-                      Expanded(
-                          child: AppDateField(
-                              label: 'Ngày báo cáo',
-                              controller: dateController)),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 16.0),
-
-            // Kết luận
-            SectionBox(
-              title: 'Kết luận',
-              child: Row(
-                children: [
-                  // "Nội dung" input text
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 8.0),
-                      child: TextFormField(
-                        decoration: const InputDecoration(
-                          hintText: 'Nội dung',
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                    ),
-                  ),
-                  // "CV số" input text
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 8.0),
-                      child: TextFormField(
-                        decoration: const InputDecoration(
-                          hintText: 'CV số',
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                    ),
-                  ),
-                  // "từ ngày" date picker
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 8.0),
-                      child: AppDateField(
-                          label: 'từ ngày', controller: dateController1),
-                    ),
-                  ),
-                  // "đến ngày" date picker
-                  Expanded(
-                    child: AppDateField(
-                        label: 'đến ngày', controller: dateController2),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 16.0),
-            // Add more widgets for other search criteria here...
-
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    // Tìm mới Button
-                    Padding(
-                      padding: const EdgeInsets.only(right: 8.0),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          // Add your onPressed logic here
-                        },
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.blue, // Background color
-                          onPrimary: Colors.white, // Text color
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 10),
-                          textStyle: const TextStyle(fontSize: 16),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30.0),
-                          ),
-                        ),
-                        child: const Text('Tìm mới'),
-                      ),
-                    ),
-                    // Tìm Button
-                    ElevatedButton(
-                      onPressed: () {
-                        // Add your onPressed logic here
-                      },
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.green, // Background color
-                        onPrimary: Colors.white, // Text color
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 10),
-                        textStyle: const TextStyle(fontSize: 16),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30.0),
-                        ),
-                      ),
-                      child: const Text('Tìm'),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
+          ),
         ),
-      ),
+      ]),
     );
   }
 
