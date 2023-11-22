@@ -5,7 +5,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 
-import 'ui/home/home_page.dart';
+import 'ui/home/home_screen.dart';
 
 void main() {
   runApp(MyApp());
