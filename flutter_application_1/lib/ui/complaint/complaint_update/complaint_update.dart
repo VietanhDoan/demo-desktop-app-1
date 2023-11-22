@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/utils/app_color.dart';
+import 'package:flutter_application_1/utils/app_style.dart';
 
 class ComplaintUpdateScreen extends StatefulWidget {
   @override
@@ -22,7 +23,6 @@ class _ComplaintUpdateScreenState extends State<ComplaintUpdateScreen> {
   TextEditingController _contentController = TextEditingController();
   String _returnOrderValue = 'Yes';
   String _authorityValue = 'Within Authority';
-
 
   @override
   void dispose() {
@@ -64,8 +64,8 @@ class _ComplaintUpdateScreenState extends State<ComplaintUpdateScreen> {
               // Section 1 - No title, just content
               Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.0),
-                  color: AppColor.yellow,
+                  borderRadius: BorderRadius.circular(16.0),
+                  color: Colors.white,
                 ),
                 margin: EdgeInsets.all(16.0),
                 padding: EdgeInsets.all(16.0),
@@ -76,6 +76,7 @@ class _ComplaintUpdateScreenState extends State<ComplaintUpdateScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
+                          flex: 1,
                           child: TextFormField(
                             enabled: false,
                             decoration: InputDecoration(
@@ -86,6 +87,7 @@ class _ComplaintUpdateScreenState extends State<ComplaintUpdateScreen> {
                         ),
                         SizedBox(width: 10),
                         Expanded(
+                          flex: 4,
                           child: TextFormField(
                             enabled: false,
                             decoration: InputDecoration(
@@ -96,20 +98,22 @@ class _ComplaintUpdateScreenState extends State<ComplaintUpdateScreen> {
                         ),
                         SizedBox(width: 10),
                         Expanded(
+                          flex: 5,
                           child: TextFormField(
                             controller: _dateHandlingController,
                             decoration: InputDecoration(
                               labelText: 'Ngày thụ lý',
                               suffixIcon: Icon(Icons.calendar_today),
                             ),
-                            onTap: () => _selectDate(context, _dateHandlingController),
+                            onTap: () =>
+                                _selectDate(context, _dateHandlingController),
                             readOnly: true,
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(height: 10),   
- 
+                    SizedBox(height: 10),
+
                     // row 2
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -121,7 +125,8 @@ class _ComplaintUpdateScreenState extends State<ComplaintUpdateScreen> {
                               labelText: 'Ngày đơn lần đầu',
                               suffixIcon: Icon(Icons.calendar_today),
                             ),
-                            onTap: () => _selectDate(context, _dateFirstController),
+                            onTap: () =>
+                                _selectDate(context, _dateFirstController),
                             readOnly: true,
                           ),
                         ),
@@ -145,30 +150,54 @@ class _ComplaintUpdateScreenState extends State<ComplaintUpdateScreen> {
                       ),
                     ),
                     // row 4
-Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: TextFormField(
-                      controller: _subjectController,
-                      decoration: InputDecoration(
-                        labelText: 'Đối tượng',
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: TextFormField(
+                            controller: _subjectController,
+                            decoration: InputDecoration(
+                              labelText: 'Đối tượng',
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 10),
+                        Expanded(
+                          child: DropdownButtonFormField(
+                            value: _returnOrderValue,
+                            decoration: InputDecoration(
+                              labelText: 'Trả lại đơn',
+                            ),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                _returnOrderValue = newValue!;
+                              });
+                            },
+                            items: <String>['Yes', 'No']
+                                .map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                  SizedBox(width: 10),
-                  Expanded(
-                    child: DropdownButtonFormField(
-                      value: _returnOrderValue,
+                    SizedBox(height: 20),
+
+                    // Row 5
+                    DropdownButtonFormField(
+                      value: _authorityValue,
                       decoration: InputDecoration(
-                        labelText: 'Trả lại đơn',
+                        labelText: 'Thẩm quyền',
                       ),
                       onChanged: (String? newValue) {
                         setState(() {
-                          _returnOrderValue = newValue!;
+                          _authorityValue = newValue!;
                         });
                       },
-                      items: <String>['Yes', 'No']
+                      items: <String>['Within Authority', 'Outside Authority']
                           .map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
@@ -176,40 +205,16 @@ Row(
                         );
                       }).toList(),
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 20),
+                    SizedBox(height: 20),
 
-              // Row 5
-              DropdownButtonFormField(
-                value: _authorityValue,
-                decoration: InputDecoration(
-                  labelText: 'Thẩm quyền',
-                ),
-                onChanged: (String? newValue) {
-                  setState(() {
-                    _authorityValue = newValue!;
-                  });
-                },
-                items: <String>['Within Authority', 'Outside Authority']
-                    .map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-              ),
-              SizedBox(height: 20),
-
-              // Row 6
-              TextFormField(
-                controller: _contentController,
-                decoration: InputDecoration(
-                  labelText: 'Nội dung đơn',
-                ),
-                maxLines: null, // Allows for multi-line input
-              ),
+                    // Row 6
+                    TextFormField(
+                      controller: _contentController,
+                      decoration: InputDecoration(
+                        labelText: 'Nội dung đơn',
+                      ),
+                      maxLines: null, // Allows for multi-line input
+                    ),
                     // row 5
 
                     // row 6
@@ -259,22 +264,56 @@ Row(
                       children: [
                         ElevatedButton(
                           onPressed: () {},
-                          child: Text('Nhập mới'),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              'Nhập mới',
+                              style: TextStyle(
+                                  fontSize: AppStyle.fontSizeTextButton),
+                            ),
+                          ),
                         ),
-                        SizedBox(width: 12.0,),
+                        SizedBox(
+                          width: 12.0,
+                        ),
                         ElevatedButton(
                           onPressed: () {},
-                          child: Text('Update'),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              'Update',
+                              style: TextStyle(
+                                  fontSize: AppStyle.fontSizeTextButton),
+                            ),
+                          ),
                         ),
-                        SizedBox(width: 12.0,),
+                        SizedBox(
+                          width: 12.0,
+                        ),
                         ElevatedButton(
                           onPressed: () {},
-                          child: Text('Trùng đơn+ việc'),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              'Trùng đơn + việc',
+                              style: TextStyle(
+                                  fontSize: AppStyle.fontSizeTextButton),
+                            ),
+                          ),
                         ),
-                        SizedBox(width: 12.0,),
+                        SizedBox(
+                          width: 12.0,
+                        ),
                         ElevatedButton(
                           onPressed: () {},
-                          child: Text('Tiến độ'),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              'Tiến độ',
+                              style: TextStyle(
+                                  fontSize: AppStyle.fontSizeTextButton),
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -284,8 +323,66 @@ Row(
 
               /// Section 2->5
               Section(
-                  title: 'PHÂN LOẠI ĐƠN',
-                  content: Text('Content for Phân loại đơn')),
+                title: 'PHÂN LOẠI ĐƠN',
+                content: IntrinsicHeight(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      // "Mã việc" Input Text
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                              labelText: 'Mã việc',
+                              border: OutlineInputBorder(),
+                            ),
+                          ),
+                        ),
+                      ),
+                      // "Nhóm việc" Input Text
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                              labelText: 'Nhóm việc',
+                              border: OutlineInputBorder(),
+                            ),
+                          ),
+                        ),
+                      ),
+                      // "Đơn vị phân loại" Input Text
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                              labelText: 'Đơn vị phân loại',
+                              border: OutlineInputBorder(),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              // Handle the action when the button is pressed
+                            },
+                            child: Text(
+                              'Update',
+                              style: TextStyle(
+                                  fontSize: AppStyle.fontSizeTextButton),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
               Section(
                   title: 'NƠI NHẬN ĐƯỢC ĐƠN',
                   content: Text('Content for Nơi nhận được đơn')),
@@ -336,7 +433,8 @@ Row(
     );
   }
 
-  Future<void> _selectDate(BuildContext context, TextEditingController controller) async {
+  Future<void> _selectDate(
+      BuildContext context, TextEditingController controller) async {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),

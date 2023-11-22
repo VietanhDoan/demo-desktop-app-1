@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/complaint/complaint_list/complaint_list.dart';
-import 'package:flutter_application_1/complaint/complaint_search/complaint_search.dart';
-import 'package:flutter_application_1/complaint/complaint_update/complaint_update.dart';
+import 'package:flutter_application_1/ui/complaint/complaint_list/complaint_list.dart';
+import 'package:flutter_application_1/ui/complaint/complaint_search/complaint_search.dart';
+import 'package:flutter_application_1/ui/complaint/complaint_update/complaint_update.dart';
 import 'package:flutter_application_1/utils/app_color.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
 

@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/ui/complaint/complaint_search/sections/general_info_widget.dart';
+import 'package:flutter_application_1/ui/complaint/complaint_search/items/section_box.dart';
 import 'package:flutter_application_1/utils/app_color.dart';
+import 'package:flutter_application_1/utils/app_date_field.dart';
+import 'package:flutter_application_1/utils/app_number_field.dart';
+import 'package:flutter_application_1/utils/app_text_field.dart';
 
 class ComplaintSearchScreen extends StatefulWidget {
   @override
@@ -18,21 +23,14 @@ class _ComplaintSearchScreenState extends State<ComplaintSearchScreen> {
   String returnOrderValue = 'Có';
   String confirmOrderValue = 'Hiện tất';
   String name = '';
-  int? daysToDeadline;
-
-  String selectedAuthority = 'Đơn thuộc thẩm quyền';
-  String selectedReturnOrder = 'Có';
-  String selectedConfirmOrder = 'Hiện tất';
 
   TextEditingController dateController1 = TextEditingController();
   TextEditingController dateController2 = TextEditingController();
-  TextEditingController reportDateController = TextEditingController();
 
   @override
   void dispose() {
     dateController1.dispose();
     dateController2.dispose();
-    reportDateController.dispose();
     super.dispose();
   }
 
@@ -45,7 +43,7 @@ class _ComplaintSearchScreenState extends State<ComplaintSearchScreen> {
         centerTitle: true,
         backgroundColor: Colors.black,
         leading: IconButton(
-          icon: Icon(Icons.account_balance),
+          icon: const Icon(Icons.account_balance),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -56,11 +54,11 @@ class _ComplaintSearchScreenState extends State<ComplaintSearchScreen> {
         child: ListView(
           children: <Widget>[
             statusWidget(),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
 
             // Thông tin chung
-            generalInfoWidget(),
-            SizedBox(height: 16.0),
+            const GeneralInfoWidget(),
+            const SizedBox(height: 16.0),
 
             // Phân loại đơn và Noi nhận được đon
             Row(
@@ -75,7 +73,7 @@ class _ComplaintSearchScreenState extends State<ComplaintSearchScreen> {
                           child: Padding(
                             padding: const EdgeInsets.only(right: 8.0),
                             child: TextFormField(
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 hintText: 'Mã việc',
                                 border: OutlineInputBorder(),
                               ),
@@ -84,7 +82,7 @@ class _ComplaintSearchScreenState extends State<ComplaintSearchScreen> {
                         ),
                         Expanded(
                           child: TextFormField(
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               hintText: 'Đơn vị phân loại',
                               border: OutlineInputBorder(),
                             ),
@@ -94,57 +92,59 @@ class _ComplaintSearchScreenState extends State<ComplaintSearchScreen> {
                     ),
                   ),
                 ),
-                SizedBox(width: 16.0),
+                const SizedBox(width: 16.0),
                 Expanded(
                   child: SectionBox(
                     title: 'Nơi nhận được đơn',
                     child: Column(
                       children: [
                         // Hàng 1
-                        Row(
+                        const Row(
                           children: [
                             Expanded(
                               child: Padding(
-                                padding: const EdgeInsets.only(right: 8.0),
-                                child: buildTextField('Đơn vị'),
+                                padding: EdgeInsets.only(right: 8.0),
+                                child: AppTextField(hint: 'Đơn vị'),
                               ),
                             ),
                             Expanded(
                               child: Padding(
-                                padding: const EdgeInsets.only(right: 8.0),
-                                child: buildTextField('Nguồn'),
+                                padding: EdgeInsets.only(right: 8.0),
+                                child: AppTextField(hint: 'Nguồn'),
                               ),
                             ),
                             Expanded(
                               child: Padding(
-                                padding: const EdgeInsets.only(right: 8.0),
-                                child: buildTextField('Lần'),
+                                padding: EdgeInsets.only(right: 8.0),
+                                child: AppTextField(hint: 'Lần'),
                               ),
                             ),
                             Expanded(
-                              child: buildTextField('Số đơn'),
+                              child: AppTextField(hint: 'Số đơn'),
                             ),
                           ],
                         ),
                         // Hàng 2
                         Row(
                           children: [
-                            Expanded(
+                            const Expanded(
                               child: Padding(
-                                padding: const EdgeInsets.only(right: 8.0),
-                                child: buildTextField('CV số'),
+                                padding: EdgeInsets.only(right: 8.0),
+                                child: AppTextField(hint: 'CV số'),
                               ),
                             ),
                             Expanded(
                               child: Padding(
                                 padding: const EdgeInsets.only(right: 8.0),
-                                child:
-                                    buildDateField('từ ngày', dateController1),
+                                child: AppDateField(
+                                    label: 'từ ngày',
+                                    controller: dateController1),
                               ),
                             ),
                             Expanded(
-                              child:
-                                  buildDateField('đến ngày', dateController2),
+                              child: AppDateField(
+                                  label: 'đến ngày',
+                                  controller: dateController2),
                             ),
                           ],
                         ),
@@ -154,13 +154,15 @@ class _ComplaintSearchScreenState extends State<ComplaintSearchScreen> {
                             Expanded(
                               child: Padding(
                                 padding: const EdgeInsets.only(right: 8.0),
-                                child: buildDateField(
-                                    'Nhận đơn từ ngày', dateController1),
+                                child: AppDateField(
+                                    label: 'Nhận đơn từ ngày',
+                                    controller: dateController1),
                               ),
                             ),
                             Expanded(
-                              child:
-                                  buildDateField('đến ngày', dateController2),
+                              child: AppDateField(
+                                  label: 'đến ngày',
+                                  controller: dateController2),
                             ),
                           ],
                         ),
@@ -170,7 +172,7 @@ class _ComplaintSearchScreenState extends State<ComplaintSearchScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
 
             // Quá trình xử lý
             SectionBox(
@@ -180,39 +182,44 @@ class _ComplaintSearchScreenState extends State<ComplaintSearchScreen> {
                   Row(
                     children: [
                       Expanded(
-                          child:
-                              buildDateField('Nhận từ ngày', dateController1)),
-                      SizedBox(width: 8.0),
+                          child: AppDateField(
+                              label: 'Nhận từ ngày',
+                              controller: dateController1)),
+                      const SizedBox(width: 8.0),
                       Expanded(
-                          child: buildDateField('đến ngày', dateController2)),
-                      SizedBox(width: 8.0),
-                      Expanded(child: buildTextField('Đơn vị')),
-                      SizedBox(width: 8.0),
-                      Expanded(child: buildTextField('Nội dung')),
+                          child: AppDateField(
+                              label: 'đến ngày', controller: dateController2)),
+                      const SizedBox(width: 8.0),
+                      const Expanded(child: AppTextField(hint: 'Đơn vị')),
+                      const SizedBox(width: 8.0),
+                      const Expanded(child: AppTextField(hint: 'Nội dung')),
                     ],
                   ),
-                  SizedBox(height: 8.0),
+                  const SizedBox(height: 8.0),
                   Row(
                     children: [
-                      Expanded(child: buildNumberField('CV số')),
-                      SizedBox(width: 8.0),
+                      const Expanded(child: AppNumberField(hint: 'CV số')),
+                      const SizedBox(width: 8.0),
                       Expanded(
-                          child: buildDateField('từ ngày', dateController1)),
-                      SizedBox(width: 8.0),
+                          child: AppDateField(
+                              label: 'từ ngày', controller: dateController1)),
+                      const SizedBox(width: 8.0),
                       Expanded(
-                          child: buildDateField('đến ngày', dateController2)),
-                      SizedBox(width: 8.0),
-                      Expanded(child: buildTextField('Cán bộ')),
-                      SizedBox(width: 8.0),
+                          child: AppDateField(
+                              label: 'đến ngày', controller: dateController2)),
+                      const SizedBox(width: 8.0),
+                      const Expanded(child: AppTextField(hint: 'Cán bộ')),
+                      const SizedBox(width: 8.0),
                       Expanded(
-                          child: buildDateField(
-                              'Ngày báo cáo', reportDateController)),
+                          child: AppDateField(
+                              label: 'Ngày báo cáo',
+                              controller: dateController)),
                     ],
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
 
             // Kết luận
             SectionBox(
@@ -224,7 +231,7 @@ class _ComplaintSearchScreenState extends State<ComplaintSearchScreen> {
                     child: Padding(
                       padding: const EdgeInsets.only(right: 8.0),
                       child: TextFormField(
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           hintText: 'Nội dung',
                           border: OutlineInputBorder(),
                         ),
@@ -236,7 +243,7 @@ class _ComplaintSearchScreenState extends State<ComplaintSearchScreen> {
                     child: Padding(
                       padding: const EdgeInsets.only(right: 8.0),
                       child: TextFormField(
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           hintText: 'CV số',
                           border: OutlineInputBorder(),
                         ),
@@ -247,17 +254,19 @@ class _ComplaintSearchScreenState extends State<ComplaintSearchScreen> {
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.only(right: 8.0),
-                      child: buildDateField('từ ngày', dateController1),
+                      child: AppDateField(
+                          label: 'từ ngày', controller: dateController1),
                     ),
                   ),
                   // "đến ngày" date picker
                   Expanded(
-                    child: buildDateField('đến ngày', dateController2),
+                    child: AppDateField(
+                        label: 'đến ngày', controller: dateController2),
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             // Add more widgets for other search criteria here...
 
             Center(
@@ -276,14 +285,14 @@ class _ComplaintSearchScreenState extends State<ComplaintSearchScreen> {
                         style: ElevatedButton.styleFrom(
                           primary: Colors.blue, // Background color
                           onPrimary: Colors.white, // Text color
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                               horizontal: 20, vertical: 10),
-                          textStyle: TextStyle(fontSize: 16),
+                          textStyle: const TextStyle(fontSize: 16),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0),
                           ),
                         ),
-                        child: Text('Tìm mới'),
+                        child: const Text('Tìm mới'),
                       ),
                     ),
                     // Tìm Button
@@ -294,14 +303,14 @@ class _ComplaintSearchScreenState extends State<ComplaintSearchScreen> {
                       style: ElevatedButton.styleFrom(
                         primary: Colors.green, // Background color
                         onPrimary: Colors.white, // Text color
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        textStyle: TextStyle(fontSize: 16),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 10),
+                        textStyle: const TextStyle(fontSize: 16),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30.0),
                         ),
                       ),
-                      child: Text('Tìm'),
+                      child: const Text('Tìm'),
                     ),
                   ],
                 ),
@@ -360,7 +369,7 @@ class _ComplaintSearchScreenState extends State<ComplaintSearchScreen> {
           Padding(
             padding: const EdgeInsets.only(bottom: 8.0),
             child: TextFormField(
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Mã việc',
                 border: OutlineInputBorder(),
               ),
@@ -372,7 +381,7 @@ class _ComplaintSearchScreenState extends State<ComplaintSearchScreen> {
             padding: const EdgeInsets.only(bottom: 8.0),
             child: DropdownButtonFormField<String>(
               value: dropdownValue2,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Đơn vị phân loại',
                 border: OutlineInputBorder(),
               ),
@@ -399,7 +408,7 @@ class _ComplaintSearchScreenState extends State<ComplaintSearchScreen> {
                   padding: const EdgeInsets.only(right: 8.0),
                   child: TextFormField(
                     controller: dateController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Nhận từ ngày',
                       border: OutlineInputBorder(),
                     ),
@@ -424,7 +433,7 @@ class _ComplaintSearchScreenState extends State<ComplaintSearchScreen> {
               Expanded(
                 child: TextFormField(
                   controller: dateController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'đến ngày',
                     border: OutlineInputBorder(),
                   ),
@@ -440,226 +449,6 @@ class _ComplaintSearchScreenState extends State<ComplaintSearchScreen> {
           // Add your buttons or additional form fields here
         ],
       ),
-    );
-  }
-
-  Widget buildDropdown(String label, List<String> items, String? value,
-      void Function(String?) onChanged) {
-    return DropdownButtonFormField<String>(
-      decoration: InputDecoration(
-        labelText: label,
-        border: OutlineInputBorder(),
-      ),
-      value: value,
-      onChanged: (value) => onChanged(
-          value), // The onChanged callback now handles a nullable String
-      items: items.map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildRowTextFields(String firstHint, String secondHint) {
-    return Row(
-      children: [
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.only(right: 8.0),
-            child: buildTextField(firstHint),
-          ),
-        ),
-        Expanded(
-          child: buildTextField(secondHint),
-        ),
-      ],
-    );
-  }
-
-  Widget buildTextField(String hint) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: TextFormField(
-        decoration: InputDecoration(
-          hintText: hint,
-          border: OutlineInputBorder(),
-        ),
-      ),
-    );
-  }
-
-  Widget buildNumberField(String hint) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: TextFormField(
-        decoration: InputDecoration(
-          hintText: hint,
-          border: OutlineInputBorder(),
-        ),
-        keyboardType: TextInputType.number,
-        onChanged: (value) {
-          setState(() {
-            daysToDeadline = int.tryParse(value);
-          });
-        },
-      ),
-    );
-  }
-
-  Widget buildDateRangePicker(String firstLabel, String secondLabel) {
-    return Row(
-      children: [
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.only(right: 8.0),
-            child: buildDateField(firstLabel, reportDateController),
-          ),
-        ),
-        Expanded(
-          child: buildDateField(secondLabel, reportDateController),
-        ),
-      ],
-    );
-  }
-
-  Widget buildDateField(String label, TextEditingController controller) {
-    return TextFormField(
-      controller: controller,
-      decoration: InputDecoration(
-        labelText: label,
-        border: OutlineInputBorder(),
-      ),
-      onTap: () async {
-        DateTime? pickedDate = await showDatePicker(
-          context: context,
-          initialDate: DateTime.now(),
-          firstDate: DateTime(2000),
-          lastDate: DateTime(2101),
-        );
-        if (pickedDate != null) {
-          String formattedDate =
-              "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}";
-          setState(() {
-            controller.text = formattedDate;
-          });
-        }
-      },
-    );
-  }
-
-  Widget generalInfoWidget() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Left column (Column 1)
-        Expanded(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: buildDropdown(
-                      'Thẩm quyền',
-                      ['Đơn thuộc thẩm quyền', 'Đơn không thuộc thẩm quyền'],
-                      selectedAuthority,
-                      (newValue) {
-                        if (newValue != null) {
-                          // Check for null
-                          setState(() => selectedAuthority = newValue);
-                        }
-                      },
-                    ),
-                  ),
-                  SizedBox(width: 8.0), // Spacing between the dropdowns
-                  Expanded(
-                    child: buildDropdown(
-                      'Trả lại đơn',
-                      ['Có', 'Không'],
-                      selectedReturnOrder,
-                      (newValue) {
-                        if (newValue != null) {
-                          // Check for null
-                          setState(() => selectedReturnOrder = newValue);
-                        }
-                      },
-                    ),
-                  ),
-                ],
-              ),
-              buildRowTextFields('Số TT', 'Đơn vị'),
-              buildDateRangePicker('Ngày đơn lần đầu từ ngày', 'đến ngày'),
-              buildTextField('Địa chỉ'),
-              buildTextField('Nội dung đơn'),
-            ],
-          ),
-        ),
-        const SizedBox(width: 16.0),
-        Expanded(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              buildDropdown(
-                'Xác nhận đơn',
-                ['Hiện tất', 'Hiện một phần'],
-                selectedConfirmOrder,
-                (newValue) {
-                  if (newValue != null) {
-                    // Check for null
-                    setState(() => selectedConfirmOrder = newValue);
-                  }
-                },
-              ),
-              SizedBox(height: 8.0),
-              buildDateRangePicker('Thụ lý từ ngày', 'đến ngày'),
-              buildTextField('Họ và tên'),
-              buildNumberField('Số ngày sắp quá hạn'),
-              buildDateRangePicker('Thời hạn từ ngày', 'đến ngày'),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class SectionBox extends StatelessWidget {
-  final String title;
-  final Widget child;
-
-  const SectionBox({Key? key, required this.title, required this.child})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            decoration: TextDecoration.none,
-            fontSize: 20,
-          ),
-        ),
-        SizedBox(height: 8.0),
-        Container(
-          padding: const EdgeInsets.all(16.0),
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey),
-            borderRadius: BorderRadius.circular(5.0),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              child,
-            ],
-          ),
-        ),
-      ],
     );
   }
 }
