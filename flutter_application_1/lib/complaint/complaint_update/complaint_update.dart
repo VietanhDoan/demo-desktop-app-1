@@ -65,7 +65,7 @@ class _ComplaintUpdateScreenState extends State<ComplaintUpdateScreen> {
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8.0),
-                  color: const Color.fromARGB(255, 237, 232, 187),
+                  color: AppColor.yellow,
                 ),
                 margin: EdgeInsets.all(16.0),
                 padding: EdgeInsets.all(16.0),
@@ -251,24 +251,27 @@ Row(
                         ),
                       ],
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: 20),
 
                     // row 8
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         ElevatedButton(
                           onPressed: () {},
                           child: Text('Nhập mới'),
                         ),
+                        SizedBox(width: 12.0,),
                         ElevatedButton(
                           onPressed: () {},
                           child: Text('Update'),
                         ),
+                        SizedBox(width: 12.0,),
                         ElevatedButton(
                           onPressed: () {},
                           child: Text('Trùng đơn+ việc'),
                         ),
+                        SizedBox(width: 12.0,),
                         ElevatedButton(
                           onPressed: () {},
                           child: Text('Tiến độ'),

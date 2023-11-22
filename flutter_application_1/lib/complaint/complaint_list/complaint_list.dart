@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/utils/app_color.dart';
 
 class ComplaintListScreen extends StatefulWidget {
   @override
@@ -25,8 +26,17 @@ class _ComplaintListScreenState extends State<ComplaintListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColor.orange,
       appBar: AppBar(
         title: const Text('DANH SÁCH ĐƠN KHIẾU NẠI TỐ CÁO'),
+        centerTitle: true,
+        backgroundColor: Colors.black,
+        leading: IconButton(
+          icon: Icon(Icons.account_balance), // Icon for the Viện kiểm sát
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: Center(
         child: SingleChildScrollView(

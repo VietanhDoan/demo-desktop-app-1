@@ -85,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: AppColor.orange,
       appBar: AppBar(
-        title: Text('Phần mềm Quản lý Đơn khiếu nại tố cáo'),
+        title: Text('PHẦN MỀM QUẢN LÝ ĐƠN KHIẾU NẠI TỐ CÁO'),
         centerTitle: true,
         backgroundColor: Colors.black,
       ),

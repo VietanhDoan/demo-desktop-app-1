@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/utils/app_color.dart';
 
 class ComplaintSearchScreen extends StatefulWidget {
   @override
@@ -27,7 +28,6 @@ class _ComplaintSearchScreenState extends State<ComplaintSearchScreen> {
   TextEditingController dateController2 = TextEditingController();
   TextEditingController reportDateController = TextEditingController();
 
-
   @override
   void dispose() {
     dateController1.dispose();
@@ -39,8 +39,17 @@ class _ComplaintSearchScreenState extends State<ComplaintSearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColor.orange,
       appBar: AppBar(
         title: const Text('TÌM KIẾM ĐƠN KHIẾU NẠI TỐ CÁO'),
+        centerTitle: true,
+        backgroundColor: Colors.black,
+        leading: IconButton(
+          icon: Icon(Icons.account_balance),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -50,7 +59,7 @@ class _ComplaintSearchScreenState extends State<ComplaintSearchScreen> {
             SizedBox(height: 16.0),
 
             // Thông tin chung
-            generalInfoWidget(), 
+            generalInfoWidget(),
             SizedBox(height: 16.0),
 
             // Phân loại đơn và Noi nhận được đon
@@ -88,72 +97,76 @@ class _ComplaintSearchScreenState extends State<ComplaintSearchScreen> {
                 SizedBox(width: 16.0),
                 Expanded(
                   child: SectionBox(
-                  title: 'Nơi nhận được đơn',
-                  child: Column(
-                    children: [
-                      // Hàng 1
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 8.0),
-                              child: buildTextField('Đơn vị'),
+                    title: 'Nơi nhận được đơn',
+                    child: Column(
+                      children: [
+                        // Hàng 1
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: 8.0),
+                                child: buildTextField('Đơn vị'),
+                              ),
                             ),
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 8.0),
-                              child: buildTextField('Nguồn'),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: 8.0),
+                                child: buildTextField('Nguồn'),
+                              ),
                             ),
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 8.0),
-                              child: buildTextField('Lần'),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: 8.0),
+                                child: buildTextField('Lần'),
+                              ),
                             ),
-                          ),
-                          Expanded(
-                            child: buildTextField('Số đơn'),
-                          ),
-                        ],
-                      ),
-                      // Hàng 2
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 8.0),
-                              child: buildTextField('CV số'),
+                            Expanded(
+                              child: buildTextField('Số đơn'),
                             ),
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 8.0),
-                              child: buildDateField('từ ngày', dateController1),
+                          ],
+                        ),
+                        // Hàng 2
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: 8.0),
+                                child: buildTextField('CV số'),
+                              ),
                             ),
-                          ),
-                          Expanded(
-                            child: buildDateField('đến ngày', dateController2),
-                          ),
-                        ],
-                      ),
-                      // Hàng 3
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 8.0),
-                              child: buildDateField('Nhận đơn từ ngày', dateController1),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: 8.0),
+                                child:
+                                    buildDateField('từ ngày', dateController1),
+                              ),
                             ),
-                          ),
-                          Expanded(
-                            child: buildDateField('đến ngày', dateController2),
-                          ),
-                        ],
-                      ),
-                    ],
+                            Expanded(
+                              child:
+                                  buildDateField('đến ngày', dateController2),
+                            ),
+                          ],
+                        ),
+                        // Hàng 3
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: 8.0),
+                                child: buildDateField(
+                                    'Nhận đơn từ ngày', dateController1),
+                              ),
+                            ),
+                            Expanded(
+                              child:
+                                  buildDateField('đến ngày', dateController2),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                ),
                 ),
               ],
             ),
@@ -166,9 +179,12 @@ class _ComplaintSearchScreenState extends State<ComplaintSearchScreen> {
                 children: [
                   Row(
                     children: [
-                      Expanded(child: buildDateField('Nhận từ ngày', dateController1)),
+                      Expanded(
+                          child:
+                              buildDateField('Nhận từ ngày', dateController1)),
                       SizedBox(width: 8.0),
-                      Expanded(child: buildDateField('đến ngày', dateController2)),
+                      Expanded(
+                          child: buildDateField('đến ngày', dateController2)),
                       SizedBox(width: 8.0),
                       Expanded(child: buildTextField('Đơn vị')),
                       SizedBox(width: 8.0),
@@ -180,13 +196,17 @@ class _ComplaintSearchScreenState extends State<ComplaintSearchScreen> {
                     children: [
                       Expanded(child: buildNumberField('CV số')),
                       SizedBox(width: 8.0),
-                      Expanded(child: buildDateField('từ ngày', dateController1)),
+                      Expanded(
+                          child: buildDateField('từ ngày', dateController1)),
                       SizedBox(width: 8.0),
-                      Expanded(child: buildDateField('đến ngày', dateController2)),
+                      Expanded(
+                          child: buildDateField('đến ngày', dateController2)),
                       SizedBox(width: 8.0),
                       Expanded(child: buildTextField('Cán bộ')),
                       SizedBox(width: 8.0),
-                      Expanded(child: buildDateField('Ngày báo cáo', reportDateController)),
+                      Expanded(
+                          child: buildDateField(
+                              'Ngày báo cáo', reportDateController)),
                     ],
                   ),
                 ],
@@ -256,7 +276,8 @@ class _ComplaintSearchScreenState extends State<ComplaintSearchScreen> {
                         style: ElevatedButton.styleFrom(
                           primary: Colors.blue, // Background color
                           onPrimary: Colors.white, // Text color
-                          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
                           textStyle: TextStyle(fontSize: 16),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0),
@@ -273,7 +294,8 @@ class _ComplaintSearchScreenState extends State<ComplaintSearchScreen> {
                       style: ElevatedButton.styleFrom(
                         primary: Colors.green, // Background color
                         onPrimary: Colors.white, // Text color
-                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                         textStyle: TextStyle(fontSize: 16),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30.0),
@@ -290,7 +312,7 @@ class _ComplaintSearchScreenState extends State<ComplaintSearchScreen> {
       ),
     );
   }
-  
+
   Widget statusWidget() {
     return Center(
       child: SingleChildScrollView(
@@ -330,110 +352,107 @@ class _ComplaintSearchScreenState extends State<ComplaintSearchScreen> {
     TextEditingController dateController = TextEditingController();
     String dropdownValue2 = 'One';
     return SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            // Example of a text field
-            Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Mã việc',
-                  border: OutlineInputBorder(),
-                ),
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          // Example of a text field
+          Padding(
+            padding: const EdgeInsets.only(bottom: 8.0),
+            child: TextFormField(
+              decoration: InputDecoration(
+                labelText: 'Mã việc',
+                border: OutlineInputBorder(),
               ),
             ),
-            
-            // Example of a dropdown
-            Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
-              child: DropdownButtonFormField<String>(
-                value: dropdownValue2,
-                decoration: InputDecoration(
-                  labelText: 'Đơn vị phân loại',
-                  border: OutlineInputBorder(),
-                ),
-                onChanged: (String? newValue) {
-                  setState(() {
-                    dropdownValue2 = newValue!;
-                  });
-                },
-                items: <String>['One', 'Two', 'Free', 'Four']
-                    .map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-              ),
-            ),
-            
-            // Example of date range fields
-            Row(
-              children: <Widget>[
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 8.0),
-                    child: TextFormField(
-                      controller: dateController,
-                      decoration: InputDecoration(
-                        labelText: 'Nhận từ ngày',
-                        border: OutlineInputBorder(),
-                      ),
-                      onTap: () async {
-                        DateTime? pickedDate = await showDatePicker(
-                            context: context,
-                            initialDate: DateTime.now(),
-                            firstDate: DateTime(2000),
-                            lastDate: DateTime(2101));
+          ),
 
-                        if (pickedDate != null) {
-                          String formattedDate = "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}";
-                          setState(() {
-                            dateController.text = formattedDate;
-                          });
-                        }
-                      },
-                    ),
-                  ),
-                ),
-                Expanded(
+          // Example of a dropdown
+          Padding(
+            padding: const EdgeInsets.only(bottom: 8.0),
+            child: DropdownButtonFormField<String>(
+              value: dropdownValue2,
+              decoration: InputDecoration(
+                labelText: 'Đơn vị phân loại',
+                border: OutlineInputBorder(),
+              ),
+              onChanged: (String? newValue) {
+                setState(() {
+                  dropdownValue2 = newValue!;
+                });
+              },
+              items: <String>['One', 'Two', 'Free', 'Four']
+                  .map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            ),
+          ),
+
+          // Example of date range fields
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
                   child: TextFormField(
                     controller: dateController,
                     decoration: InputDecoration(
-                      labelText: 'đến ngày',
+                      labelText: 'Nhận từ ngày',
                       border: OutlineInputBorder(),
                     ),
                     onTap: () async {
-                      // ... Repeat the process for picking an end date
+                      DateTime? pickedDate = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(2000),
+                          lastDate: DateTime(2101));
+
+                      if (pickedDate != null) {
+                        String formattedDate =
+                            "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}";
+                        setState(() {
+                          dateController.text = formattedDate;
+                        });
+                      }
                     },
                   ),
                 ),
-              ],
-            ),
-            
-            // Other fields would follow a similar pattern...
-            // Add your buttons or additional form fields here
-            
-          ],
-        ),
-      );
+              ),
+              Expanded(
+                child: TextFormField(
+                  controller: dateController,
+                  decoration: InputDecoration(
+                    labelText: 'đến ngày',
+                    border: OutlineInputBorder(),
+                  ),
+                  onTap: () async {
+                    // ... Repeat the process for picking an end date
+                  },
+                ),
+              ),
+            ],
+          ),
+
+          // Other fields would follow a similar pattern...
+          // Add your buttons or additional form fields here
+        ],
+      ),
+    );
   }
-  
-  Widget buildDropdown(
-      String label, 
-      List<String> items, 
-      String? value, 
-      void Function(String?) onChanged
-  ) {
+
+  Widget buildDropdown(String label, List<String> items, String? value,
+      void Function(String?) onChanged) {
     return DropdownButtonFormField<String>(
       decoration: InputDecoration(
         labelText: label,
         border: OutlineInputBorder(),
       ),
       value: value,
-      onChanged: (value) => onChanged(value), // The onChanged callback now handles a nullable String
+      onChanged: (value) => onChanged(
+          value), // The onChanged callback now handles a nullable String
       items: items.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
@@ -520,7 +539,8 @@ class _ComplaintSearchScreenState extends State<ComplaintSearchScreen> {
           lastDate: DateTime(2101),
         );
         if (pickedDate != null) {
-          String formattedDate = "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}";
+          String formattedDate =
+              "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}";
           setState(() {
             controller.text = formattedDate;
           });
@@ -528,7 +548,7 @@ class _ComplaintSearchScreenState extends State<ComplaintSearchScreen> {
       },
     );
   }
-  
+
   Widget generalInfoWidget() {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -539,34 +559,36 @@ class _ComplaintSearchScreenState extends State<ComplaintSearchScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Row(
-              children: [
-                Expanded(
-                  child: buildDropdown(
-                    'Thẩm quyền',
-                    ['Đơn thuộc thẩm quyền', 'Đơn không thuộc thẩm quyền'],
-                    selectedAuthority,
-                    (newValue) {
-                      if (newValue != null) { // Check for null
-                        setState(() => selectedAuthority = newValue);
-                      }
-                    },
+                children: [
+                  Expanded(
+                    child: buildDropdown(
+                      'Thẩm quyền',
+                      ['Đơn thuộc thẩm quyền', 'Đơn không thuộc thẩm quyền'],
+                      selectedAuthority,
+                      (newValue) {
+                        if (newValue != null) {
+                          // Check for null
+                          setState(() => selectedAuthority = newValue);
+                        }
+                      },
+                    ),
                   ),
-                ),
-                SizedBox(width: 8.0), // Spacing between the dropdowns
-                Expanded(
-                  child: buildDropdown(
-                    'Trả lại đơn',
-                    ['Có', 'Không'],
-                    selectedReturnOrder,
-                    (newValue) {
-                      if (newValue != null) { // Check for null
-                        setState(() => selectedReturnOrder = newValue);
-                      }
-                    },
+                  SizedBox(width: 8.0), // Spacing between the dropdowns
+                  Expanded(
+                    child: buildDropdown(
+                      'Trả lại đơn',
+                      ['Có', 'Không'],
+                      selectedReturnOrder,
+                      (newValue) {
+                        if (newValue != null) {
+                          // Check for null
+                          setState(() => selectedReturnOrder = newValue);
+                        }
+                      },
+                    ),
                   ),
-                ),
-              ],
-            ),
+                ],
+              ),
               buildRowTextFields('Số TT', 'Đơn vị'),
               buildDateRangePicker('Ngày đơn lần đầu từ ngày', 'đến ngày'),
               buildTextField('Địa chỉ'),
@@ -584,7 +606,8 @@ class _ComplaintSearchScreenState extends State<ComplaintSearchScreen> {
                 ['Hiện tất', 'Hiện một phần'],
                 selectedConfirmOrder,
                 (newValue) {
-                  if (newValue != null) { // Check for null
+                  if (newValue != null) {
+                    // Check for null
                     setState(() => selectedConfirmOrder = newValue);
                   }
                 },
@@ -606,7 +629,8 @@ class SectionBox extends StatelessWidget {
   final String title;
   final Widget child;
 
-  const SectionBox({Key? key, required this.title, required this.child}) : super(key: key);
+  const SectionBox({Key? key, required this.title, required this.child})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
